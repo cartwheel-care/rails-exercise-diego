@@ -9,6 +9,6 @@ class PatientsController < ApplicationController
     result = PatientSyncService.new(@patient).sync
 
     flash[result.flash_type] = result.flash_message
-    redirect_to action: :index
+    redirect_to params[:button] == 'contacts' ? contacts_path : patients_path
   end
 end
