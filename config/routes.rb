@@ -8,6 +8,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :contacts do
+    member do
+      put :make_patient
+    end
+  end
+
   # Defines the root path route ("/")
   root "home#index"
 end

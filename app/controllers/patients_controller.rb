@@ -6,9 +6,9 @@ class PatientsController < ApplicationController
   def sync
     @patient = Patient.find(params[:id])
 
-    PatientSyncService.new(@patient).sync
+    result = PatientSyncService.new(@patient).sync
 
-    flash[:info] = "Synced patient '#{@patient.first_name} #{@patient.last_name}' with Sicklie"
-    redirect_to action: :index
+    flash[result.flash_type] = result.flash_message
+    redirect_to params[:button] == 'contacts' ? contacts_path : patients_path
   end
 end
